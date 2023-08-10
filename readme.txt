@@ -1,1 +1,1 @@
-saginosa
+discord bot that fetches news
