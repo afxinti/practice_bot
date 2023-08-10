@@ -3,7 +3,7 @@ from discord.ext import commands,tasks
 import random
 import time
 import use_token
-
+import aiohttp
 
 
 intents = discord.Intents.default()
@@ -42,6 +42,20 @@ async def stop_loop(ctx,arg):
 async def quik_mafs(ctx,arg):
     rand = int(round(random.random()*10**(int(arg))))
     await ctx.send(rand)
+
+
+
+@bot.command()
+async def get_data(ctx):
+    url = "https://content.guardianapis.com/search?q=music&api-key="+use_token.api_key #mporoume na valoume kai kapoio arg opote na kanei search sygkekrimeno anti gia music
+    async with aiohttp.ClientSession() as session:
+        async with session.get(url) as resp:
+            if resp.status == 200:
+                data = await resp.json()
+                
+                await ctx.send(f'Status: {"HRTHE!"}')
+            else:
+                await ctx.send(f'Error: {resp.status}')
 
 
 bot.run(use_token.token)
