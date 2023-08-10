@@ -13,8 +13,7 @@ bot = commands.Bot(command_prefix='/', intents=intents)
 
 @bot.event
 async def on_ready():
-    print(f'Logged in as {bot.user} (ID: {bot.user.id})')
-    print('------')
+    await bot.get_channel(1138898309206003855).send(f'Είμαι το {bot.user.display_name} και μόλις ξεκίνησα')
 
 # executes the function hello every x seconds after initiation
 @tasks.loop(seconds=30)
@@ -37,14 +36,12 @@ async def stop_loop(ctx,arg):
         hello.cancel()
         boo = "ok"
         await ctx.send(boo)
-
+        
+#Producing a random integer of length arg
 @bot.command()
 async def quik_mafs(ctx,arg):
     rand = int(round(random.random()*10**(int(arg))))
     await ctx.send(rand)
-
-
-
 
 
 bot.run(use_token.token)
